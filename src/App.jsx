@@ -3,21 +3,16 @@ import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, Stage } from '@react-three/drei';
 import {Room, Couch, Couchfuesse, Kissen1, Kissen2, Legdesk, Viernullvier, BtnLicht, BtnVenti, Maus, BtnMaus, Projektionsflaeche, KeyZ, KeyW, KeyT, KeySpace, KeyR, KeyQ, KeyEsc, KeyEnter, KeyE, KeyCtrl, LEDMoni, Monitor, Gluehbirne} from './models';
 
-
 function App() {	
 	
-	const [gluehbirneColor, setGluehbirneColor] = useState('#FFFFFF'); // Zustand für die Farbe der Gluehbirne
-	
-	const handleClickBtnLicht = (event) => {
-		console.log ('clicked');
-		// Überprüfen Sie, ob der PointerTyp eine Maus ist
-		if (event.pointerType === 'mouse') {
-		  // Umschalten der Farbe der Gluehbirne
-		  setGluehbirneColor(color => (color === '#FFFFFF' ? '#000000' : '#FFFFFF'));
-		  
-		}
-	  };
-	
+	const [color, setColor] = useState('white'); // Zustand für die Farbe
+
+  	const handleClick = () => {
+    // Farbe wechseln, wenn auf das Objekt geklickt wird
+	console.log('clicked');
+	console.log(color);
+    setColor(color === 'white' ? 'red' : 'white');
+  };
 
   return (
 	<Canvas style={{ width: '100vw', height: '100vh' }} camera={{ position: [2000, 10, 2000] }}>
@@ -36,17 +31,14 @@ function App() {
 				<Viernullvier />
 				
 				{/* onClick-Ereignis für BtnLicht-Schalter */}
-				<mesh onClick={handleClickBtnLicht}>
+				<mesh onClick={handleClick}>
 				<BtnLicht />
 				</mesh>
 				
 				<BtnVenti />
 				<Maus />
 				<BtnMaus />
-				<mesh>
 				<Projektionsflaeche />
-				<meshBasicMaterial attach="material" color="red" />
-				</mesh>
 				<KeyZ />
 				<KeyW />
 				<KeyT />
@@ -60,9 +52,7 @@ function App() {
 				<LEDMoni />
 				<Monitor />
 				{/* passt Farbe der Gluehbirne entsprechend dem internen Zustand an */}
-				<mesh>
-            	<Gluehbirne color={gluehbirneColor} />
-         		</mesh>
+             	<Gluehbirne color ={color}  />
 			</>
 			}
   		</Stage>

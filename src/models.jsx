@@ -1,7 +1,27 @@
+import React, { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber'
 import { MeshBasicMaterial } from 'three';
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+
+export const Gluehbirne = ({ color, ...props }) => { // Farbe als Prop hinzugefügt
+  const { scene } = useGLTF('/models/gluehbirne.gltf'); 
+  const meshRef = useRef();
+
+  useEffect(() => {
+    // ändert Material des Modells entsprechend der übergebenen Farbe
+    if (meshRef.current) {
+      meshRef.current.traverse((child) => {
+        if (child.isMesh) {
+          child.material.color.set(color); 
+        }
+      });
+    }
+  }, [color]);
+
+  return <primitive object={scene} ref={meshRef} {...props} />; // Props an das primitive Element übergeben
+}
+
 
 export function Room({ ...props }) {
   const { scene } = useGLTF('/models/room_col.gltf'); 
@@ -123,21 +143,7 @@ export function Monitor({ ...props }) {
   return <primitive object={scene} {...props} />;
 }
 
-export function Gluehbirne({ ...props }) {
-  const { scene } = useGLTF('/models/gluehbirne.gltf'); 
 
-  /*
-      // Durchlaufe alle Materialien des Modells und ändere die Farbe
-      scene.traverse((child) => {
-        if (child.isMesh) {
-          // ändert die Farbe des Materials
-          child.material.color.set('red');
-        }
-      });
-  */
-
-  return <primitive object={scene} {...props} />;
-}
 
 /*
 // Laden der Farbtextur
