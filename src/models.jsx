@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber'
+import { MeshBasicMaterial } from 'three';
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
 export function Room({ ...props }) {
@@ -98,7 +99,7 @@ export function KeyEsc({ ...props }) {
 }
 
 export function KeyEnter({ ...props }) {
-  const { scene } = useGLTF('/models/key_Enter.gltf'); 
+  const { scene } = useGLTF('/models/key_Enter.gltf');
   return <primitive object={scene} {...props} />;
 }
 
@@ -124,6 +125,17 @@ export function Monitor({ ...props }) {
 
 export function Gluehbirne({ ...props }) {
   const { scene } = useGLTF('/models/gluehbirne.gltf'); 
+
+  /*
+      // Durchlaufe alle Materialien des Modells und ändere die Farbe
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          // ändert die Farbe des Materials
+          child.material.color.set('red');
+        }
+      });
+  */
+
   return <primitive object={scene} {...props} />;
 }
 
