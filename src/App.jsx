@@ -6,7 +6,8 @@ import { Mesh } from 'three';
 
 function App() {	
 	
-  // Lichtschalter Farbe & Klick-handler
+  /**
+   * // Lichtschalter Farbe & Klick-handler
 	const [color, setColor] = useState('white'); // Zustand für die Farbe
 
   	const handleClick = () => {
@@ -14,8 +15,8 @@ function App() {
 	console.log('clicked');
 	console.log(color);
     setColor(color === 'white' ? 'red' : 'white');
-  };
-
+  	};
+   */
 
   return (
 	<Canvas
